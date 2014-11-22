@@ -1,0 +1,53 @@
+sequences
+
+h-3-p-4-t-2-s-1-p-3-p-4-h-1-h-1-p-1-h-2-h-3-h-4-p-1-s-3-s-1-p-1-t-2-t-2-t-2-p-4-s-2-t-2-t-2-h-2-t-2-t-1-h-2-s-3-h-5-t-1-t-1-t-1-p-1-p-4-t-2-t-2-p-3-h-4-p-1-t-1-t-1-p-2-t-2-p-3-t-2-h-3-h-1-s-2-p-3-p
+
+p-2-t-1-t-1-s-1-s-2-t-1-p-4-p-4-h-5-h-5-s-1-s-2-h-1-h-4-s-2-h-5-t-1-p-3-p-4-t-2-t-2-t-2-h-4-h-2-p-1-p-3-s-3-p-3-p-1-h-4-t-1-s-2-h-2-t-2-h-4-t-1-t-2-p-3-h-2-t-2-t-2-p-1-s-2-p-2-h-5-s-2-s-2-t-2-s-2-t-1-h-2-t-1-t-2-s-2-p-1-t-1-s-2-h-1-p-2-t
+
+
+1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60
+t-2-h-2-p-2-p-3-s-3-t-2-p-1-s-3-p-1-h-5-p-3-p-3-p-2-h-1-s-1-t-1-h-1-s-2-p-3-s-1-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-2-p-3-s-3-t-1-p-1-s-3-p-1-h-5-p-3-p-3-p-2-h-1-s-1-t-1-h-1-s-2-p-3-s-1-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-2-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-1-t-1-h-1-s-2-p-3-s-1-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-2-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-1-s-2-p-3-s-1-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-2-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-2-s-2-p-3-s-1-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+
+1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60
+t-2-h-2-p-2-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-2-s-2-p-4-s-1-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-2-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-3-s-2-p-4-s-1-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-3-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-3-s-2-p-4-s-2-h-4-p-3-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-3-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-3-s-2-p-4-s-2-h-4-p-2-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+t-2-h-2-p-3-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-3-s-2-p-4-s-2-h-4-p-1-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+
+1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60
+t-2-h-2-p-3-p-3-s-3-t-1-p-1-s-3-p-1-h-4-p-3-p-3-p-2-h-1-s-3-t-1-h-3-s-2-p-4-s-2-h-4-p-1-s-2-t-1-p-4-t-2-t-1-h-2-t-1-t-2-p-3-p-1-t-2-t-2-s-1-h-1-h-3-s-1-t-2-t-2-p-3-p-3-h-3-t-2-p-2-p-1-s-1-t-1-s-1-s-2-p-1-p-2-h-3-h-4-t-2-h-4-p-4-p-2-p-1-s
+
+
+
+
+
+
+t1s2t1s2t1s2p2s2p3s2p4s2p4s2p2s2h1s2h3s2h4s2h2s2h5s2
+
+s2p2s2p1s2p2s2p4s2p3s2p4s2
+
+
+h-1-t-1-h-4-t-1-p-4-s-1-h-4-h-3-s-3-p
+
+@ 60:
+p-4-h-5-s-2-p-2-p-3-h-2-s-1-t 
+
+@ 90:
+s3s2h2t1h2p1s3s1s3s
+
+non-overlap @ 75
+t2s3p3t2t1s1p2h5t1s
+
+non-overlap @ 45 until element 36
+t2t2s1t2t1h3t2t1s3p3s2h2p3p2h4t2t1s1t2h2s3s1s2h2p2t2p3h4p2p3h4p3p1p2s1t2t1s1h2t2t2s2s3s1h5t2t2t2p3h
+
+
+l=800:
+h4h3s1s1h4p1h3p3h5t2t2t2h5s1t1h3s3p2p3p3h2t2p4h4t2t1h1s1t2s1h5h5s2h5h1p2h2s1t1s2t2t2s1s1t2p1s1s2t2s1h1p1h4h4t1s3t2t1h2t2p2p1p3p2t1h1t2t1s3h3s3p4s2p4h2t2s3p2h5h4p4s3t1p1h4s3s1p4p2s2s1s3s1p3p3p4p3h1t1p1h5p4p3s1s2p4h3s1t2t1t1h3p1s3t1h4h1t2s1s3p4t2h2t2t2p2p1h2p1s2s3p4s1s3p2h3t1t1h5h3p3s2p4s3t1p1h5s1t1s1h5t2h3h2t2t1t1h2t2s1p1p1p2p1t1p4s3p3h4h5h1h3t2t2p2h2p3t2s2p4t1h2h3h1p2t2s1p1s3t2t1h5p1h1t2h3h1p2p4s2t1h2t1h5h5p1s2h5t1t1t1s3p4t1p4p2s3s2s1p1t1t2t2t2s2t1t2s3p1s2s3p2s2p2p1h2p3p2s2t1s3p4t2s2t2h1t1h4h3s1s2h4p1h1t1t1s3h1h3p3s1t1h2s2t1t1p2s3h4t2p2t2t2p2s1t2t1p3p1p3p4p3h5h4t2s3h2h2t1t1t2s2t1p4p3h2p4s3t2t1p3h4p2s1p1t1t2p2p4s3h5h3p1t2s2h5s3t1h3s2h4p2t1p3p4h1h2p4h1h3h5t1t2h4t2t1h4s1t2t2s2s2p1t2h3s3p4t2p2p2h5h1s3t1t2h4p1t1s1h2p4t1t1t2s1p1h5s1s3p1s2s1p4p3s3h2s3s2p2h2t2p1h3s1p4s3p2s2s1p4t1t1t1h3s3p2t2s3t2t1h3s3h3h4h4p2s1h4t1t1p1s3s1p1h2s3h5s3p1p1t2s3h3p4h3h4h1p3t2s1p4h1p2h3h1s1h2t2h1p4t1s3p1h3s3t2t1p1h1p3p1t1p4t2p4s3p4s2t2h5t1p3p4t2p4p3t2p1p4p3h4p1t1h4p1s2h3t1s1h3p4p4p1t1s2s1h4h1h3t1s3p4s3h1t2s1s2h2s1p3p4h1p4p4h4h1t2t2t2t2t2s1p4s3t1h5t2h4h2h2t1h2s3p4t1p3h4s1s2t1t1p2t2h3s3s2s1s2s2t2h2h2s3p3t2h4s3t2t1p1h5p4h4s1t2h5p3p1t1p4s3s1s3p2s3h1h1s2s1s3s1t2h4s1p1p4p2t1t2s1t1p4p1s1p3p4h4p2p2p1s3p1h2s1s3t1p4s1h4p2h1p4t1s3h4p1p1s1t2s2s2s3t2p2p1t1t1t2s2t1t2h3h4s3t2s1s3s3t2p2s1h5p2h1p3p1h4t2t2t1p4s1p4t1t1h1t2p3s1s1s3p2s3h1h5t1s2t1h5t2p3s2t2t2h5t1t2s2t2p2s3h5t1h2h1h2h4p2p4t2s3p2s1h5p4t2s3p1p2h5t1h3s2h2s3p4h1p3h3h1t1s1s2t2s3s1h1t1h4h5t2s1p3s3p2p1h3h3h1s2s2t1p2t1h3s2s1s2t2s2s2t2h5s1p4s1s1t2h4h4t2p3p4h4h4h1h1s2s1t1t2p3s1t2s3h1h1t1s1p4t1p1h2t1t2t2s3s3p3t1h1h5p1h3p3p1s1t1s1p1p3s2p2s1h2h1h2p2t1t2p3s2h2s2s1p1h2t2h1p
+
+
