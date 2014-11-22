@@ -9,4 +9,4 @@ A book was produced with images from this software. See: http://madanworb.com/bl
 
 The software was written for the Processing platform and API.
 
-There are interactive tools for changing display perameters, editing sequences, loading and saving, rendering to disk, etc.
+There are interactive tools for changing display perameters, editing sequences, loading and saving, rendering to disk, etc. Also includes some simple shaders for rendering fog, wireframes, etc.
