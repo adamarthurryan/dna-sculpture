@@ -3,21 +3,6 @@ import java.awt.event.*;
 
 /* ------ UI states*/
 
-/** True if the UI is in interactive sequence edit mode. */
-boolean editMode = false;
-
-/** The sequence edit cursor.*/ 
-int editIndex = 0;
-
-/** When true, disregard the dihedral angle and render the sequence flat. */
-boolean flatten = false;
-
-/** When true, render the sequence index of each shape. */
-boolean plotNumbers = false;
-
-/** When true, hide the sequence following the edit cursor.*/
-boolean hideAfterEditIndex = false;
-
 /** Set to true when recording the scene as a DXF file.*/
 boolean recordDXF = false;
 
@@ -505,40 +490,6 @@ void keyPressed() {
   else if (key == 'F') { 
     editEffects();
   }
-
-/*
-  if (key == TAB) {
-    editMode = !editMode;
-    if (!editMode)
-      hideAfterEditIndex = false;
-  }
-*/
-/*
-  if (editMode) {
-    if (key == 'q') {
-      editIndex--;
-      editIndex = max(0, editIndex);
-    }
-    if (key == 'w') {
-      editIndex++;
-      editIndex = min((state.sequence.length-1)/2, editIndex);
-    }
-    if (key == 't' || key =='h' || key == 'p' || key == 's') {
-      int shapeIndex = ((Integer) (Sequence.codeToIndex.get(key))).intValue();
-      if (state.sequence.length > editIndex*2+1) {
-        state.sequence[editIndex*2+1] = min(polyShapes[shapeIndex].getVertexCount()-1, state.sequence[editIndex*2+1]);
-      }
-      state.sequence[editIndex*2] = shapeIndex;
-    }
-    if (key >= '1' && key <= '9') {
-      int sideIndex = int(key) - int('1') + 1;
-      if (state.sequence.length > editIndex*2+1 && polyShapes[state.sequence[editIndex*2]].getVertexCount() > sideIndex)
-        state.sequence[editIndex*2+1] = sideIndex;
-    }
-    if (key == 'z')
-      hideAfterEditIndex = !hideAfterEditIndex;
-  }
-*/
 }
 
 /** Key handler.

@@ -54,24 +54,6 @@ void plotSequence(PShape [] shapes, int [] sequence, float angle) {
     
       //done
       endShape();
-
-      //if plot numbers is enabled, or edit mode, draw the sequence index number on the shape
-      if (plotNumbers || (editMode && i/2 == editIndex)) {
-        pushMatrix();
-        scale(0.01);
-        textSize(50);
-        if (editMode && i/2 == editIndex) 
-          fill(192,64,64);
-        else
-          fill(64,64,192);
-        text(i/2+1, 30, 50, 0.1);
-        text(i/2+1, 30, 50, -0.1);
-        popMatrix();
-      }
-    
-      //in edit mode, we can optionally hide the part of the sequence not being edited
-      if (editMode && hideAfterEditIndex && i/2 == editIndex)
-        break;
     
       //rotate the transformation matrix so that the next shape in sequence:
         //is connected to the correct edge of this shape
