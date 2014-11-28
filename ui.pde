@@ -1,58 +1,97 @@
 import processing.dxf.*;
 import java.awt.event.*;
 
-/** UI states*/
+/* ------ UI states*/
+
+/** True if the UI is in interactive sequence edit mode. */
 boolean editMode = false;
+
+/** The sequence edit cursor.*/ 
 int editIndex = 0;
+
+/** When true, disregard the dihedral angle and render the sequence flat. */
 boolean flatten = false;
+
+/** When true, render the sequence index of each shape. */
 boolean plotNumbers = false;
+
+/** When true, hide the sequence following the edit cursor.*/
 boolean hideAfterEditIndex = false;
+
+/** Set to true when recording the scene as a DXF file.*/
 boolean recordDXF = false;
+
+/** Set to true when rendering the scene as an image.*/
 boolean captureScene = false;
 
+/** Set to false to disable all visual fx.*/
 boolean renderFX = true;
+
+/** Set to true to render a soft-focus blur.*/
 boolean renderBlur = false;
+
+/** Set to true to animate the dihedral angle - folding the sequence open and closed.
 boolean animateAngle = false;
+
+/** Set to true to render the squence as a wireframe.*/
 boolean renderWireframe = false;
 
-/** Mouse position variables. */
+/* ---------- Mouse position variables. */
+
+/** True when the left mouse button is pressed.*/
 boolean mouseDownLeft = false;
+
+/** True when the right mouse button is pressed.*/
 boolean mouseDownRight = false;
+
+/** The coordinates of the mouse position during the last draw cycle.*/
 int lastMouseX=0, lastMouseY=0;
 
+/** True when shift is held down.*/ 
 boolean shiftDown = false;
+
+/** True when control is held down.*/
 boolean ctrlDown = false;
 
-/** The current position of the mouse wheel (as a delta). */
 
-/** The length of interpolation in milliseconds.*/
+/* --- Interpolation parameters 
+  Changes to the state are not reflected instantly, rather they are 
+  phased in - interpolated in - using these parameters.*/
+
+/** The length of mouse interpolation in milliseconds 
+  - the amount of time it takes a mouse movement to be fully reflected in the display.*/
 int interpolationFactorMouse = 500;
-int interpolationFactorAngle = 500;
+
+/** The length of angle interpolation in milliseconds 
+  - the amount of time it takes an angle change to be fully reflected in the display.*/int interpolationFactorAngle = 500;
 int animationFactorAngle = 100;
+
+/** The millisecond timestamp of the last draw cycle.*/
 int millisLastDraw = 0;
+/** The time elapsed since the last draw cycle.*/
 int elapsedLastDraw = 0;
 
 
+//render shaders
 PShader fog;
 PShader depth;
-
-
 PShader wireframe;
 
-
+/** Initialize the UI: shaders, listeners, etc. */
 void setupUI() {
-  setupMouseWheel();
+  //setupMouseWheel();
 
-
-  fog = loadShader("FogFrag.glsl", "FogVert.glsl");
-
-  depth = loadShader("DepthFrag.glsl", "DepthVert.glsl");
-
+  //initialize the display degrees from the state
   displayAngleDegrees = state.sequenceData.angleDegrees;
+  
+  fog = loadShader("FogFrag.glsl", "FogVert.glsl");
+  depth = loadShader("DepthFrag.glsl", "DepthVert.glsl");
   wireframe = loadShader("Wireframe.glsl");
-
 }
 
+/** Render the current scene.
+  This method is called by draw once each render cycle.
+  This is the heart of the render cycle.*/
 void renderScene() {
   //initialize the lights
   noLights();
@@ -65,6 +104,7 @@ void renderScene() {
   background(state.colorData.background);
   //noStroke();
 
+  //push a transformation matrix
   pushMatrix();
 
   //center and resize the scene so that an edge length of 1 is useful
@@ -81,6 +121,7 @@ void renderScene() {
   doMouseRotate();
   doMouseScale();
 
+  //render fx if they are enabled
   if (renderFX) {
     //pushMatrix();
     //scale(0.01);
@@ -92,13 +133,12 @@ void renderScene() {
   //plot the sequence
   plotSequence(polyShapes, state.sequenceData.sequence, radians(displayAngleDegrees));
 
-  
+  //render the wireframe with a shader, if it is enabled
   if (renderWireframe) 
     filter(wireframe);
 
+  //render fx if they are enabled
   if (renderFX) {
-    
-    
     //filter(BLUR, 1);
     //filter(BLUR, 5);
     //translate(0, 0, 0.01);
@@ -106,15 +146,24 @@ void renderScene() {
     //plotSequence(polyShapes, sequence, radians(displayAngleDegrees));
   }
 
+  //render the blur with a shader if it is enabled
   if (renderBlur) {
     filter(BLUR, 1);
   }
+
+  //reset the shaders
   resetShader();
+
+  //pop the transformation matrix
   popMatrix();
 }
 
-/** Draw handler. */
+/** Draw handler.
+  Draw is called once per render cycle.
+  This method reads changes to the state or user input and calculates the interpolation of each.
+  Calls renderScene() for the actual rendering. */
 void draw() {
+  //record to a DXF if enabled
   if (recordDXF) {
     beginRaw(DXF, "output.dxf");
   }
@@ -123,12 +172,15 @@ void draw() {
   elapsedLastDraw = millis() - millisLastDraw;
   millisLastDraw = millis();
 
+  //if we are currently animating the dihedral, update the dihedral based on the animation parameters
   if (animateAngle)
     doAnimateAngle();
+  //otherwise, interpolate the display dihedral from the state
   else 
     doDisplayAngleInterpolate();
 
   //set the shader parameters
+  //shader parameters are given in the application state
   float [] fogColor = new float[] {red(state.colorData.background)/255.0, green(state.colorData.background)/255.0, blue(state.colorData.background)/255.0, 1.0};
   float [] shadowColor = new float[] {red(state.colorData.shadow)/255.0, green(state.colorData.shadow)/255.0, blue(state.colorData.shadow)/255.0, 1.0};
   float [] lightColor = new float[] {red(state.colorData.light)/255.0, green(state.colorData.light)/255.0, blue(state.colorData.light)/255.0, 1.0}; 
@@ -142,15 +194,21 @@ void draw() {
   wireframe.set("backgroundColor", fogColor, 4);
   wireframe.set("lineColor", shadowColor, 4);
   
-
+  //initialize the camera
   initializeCaptureCamera();
+
+  //render the scene
   renderScene();
 
+  //if we are capturing the scene
   if (captureScene) {
+    //reset the flag
     captureScene=false;
+    //do the capture
     captureScene();
   }
 
+  //if we are recording a DXF, end the recording and reset the flag
   if (recordDXF) {
     endRaw();
     recordDXF = false;
@@ -167,64 +225,87 @@ void editRandomLength() {
   }
 }
 
-
+/** The dihedral angle that is currently being displayed 
+  - a function of state dihedral and interpolation, or dihedral animation.*/
 float displayAngleDegrees;
-/** Prompt for an inter-shape angle. */
+
+/** Prompt for a dihedral angle. */
 void editAngle() {
+  //prompt
   String sAngleDegrees = javax.swing.JOptionPane.showInputDialog("Inter-shape angle (in degrees):", state.sequenceData.angleDegrees);
+
+  //update the state
   if (sAngleDegrees!=null)
     state.sequenceData.angleDegrees = float(sAngleDegrees);
 
+  //update the draw timestamp
   millisLastDraw = millis();
 }
 
 /** Prompt to edit the current sequence. */
 void editSequence() {
+  //prompt
   String sSequence = Sequence.toString(state.sequenceData.sequence);
   sSequence = javax.swing.JOptionPane.showInputDialog("Sequence:", sSequence);
+  
+  //update the state
   if (sSequence!=null)
     state.sequenceData.sequence = Sequence.parse(sSequence);
 }
-/** Prompt to edit the current sequence. */
+
+/** Prompt to edit the display colors. */
 void editColors() {
+  //background color: prompt and update state
   String sColor;
   sColor = javax.swing.JOptionPane.showInputDialog("Background color:", Integer.toHexString(state.colorData.background));
   if (sColor!=null)
     state.colorData.background = Integer.parseInt(sColor, 16);
 
+  //color of light
   sColor = javax.swing.JOptionPane.showInputDialog("Light color:", Integer.toHexString(state.colorData.light));
   if (sColor!=null)
     state.colorData.light = Integer.parseInt(sColor, 16);
 
+  //color of shadow
   sColor = javax.swing.JOptionPane.showInputDialog("Shadow color:", Integer.toHexString(state.colorData.shadow));
   if (sColor!=null)
     state.colorData.shadow = Integer.parseInt(sColor, 16);
 }
 
+/** Prompt to change the number of times the sequence repeats */
 void editSequenceRepeatCount() {
+  //prompt
   String sSequenceRepeatCount = javax.swing.JOptionPane.showInputDialog("Sequence repeat count:", state.sequenceData.repeatCount);
+
+  //update state
   if (sSequenceRepeatCount!=null)
     state.sequenceData.repeatCount = int(sSequenceRepeatCount);
 }
 
 /** Prompt to edit the effects parameters. */
 void editEffects() {
+  //fog starting depth: prompt and edit state
   String sFogOffset = javax.swing.JOptionPane.showInputDialog("Fog offset:", state.fog.offset);
   if (sFogOffset != null) {
     state.fog.offset = float(sFogOffset);
   }
+
+  //fog scale (density by depth)
   String sFogScale = javax.swing.JOptionPane.showInputDialog("Fog scale:", state.fog.scale);
   if (sFogScale != null) {
     state.fog.scale = float(sFogScale);
   }
 }
 
-/** Mouse handler. */
+/** Does nothing */
 void mouseClicked() {
   //  sequence = calcRandomSequence(polyShapes, lengthRandom);
   //  printSequence(polyShapes, sequence);
 }
 
+/** Respond to mouse events.
+  Simply updates the mouse position flags and variables:
+    mouseDownLeft, mouseDownRight, lastMouseX, lastMouseY.*/
 void mousePressed() {
   if (mouseButton == LEFT)
     mouseDownLeft = true;
@@ -235,11 +316,19 @@ void mousePressed() {
   lastMouseY = mouseY;
 }
 
+/* Respond to mouse events.
+  Simply updates the mouse position flags and variables:
+    mouseDownLeft, mouseDownRight.*/
 void mouseReleased() {
   mouseDownLeft = false;
   mouseDownRight = false;
 }
 
+/* Respond to mouse events.
+    Left button drag: pan
+    Right button drag: rotate.
+    Updates the pan or rotation in the state as well as the mouse position flags and variables.
+    */
 void mouseDragged() {
   if (mouseDownLeft && !shiftDown) {
     state.pan.x = state.pan.x + (mouseX-lastMouseX);
@@ -253,17 +342,43 @@ void mouseDragged() {
   lastMouseY = mouseY;
 }
 
-/** Sets up the mouse wheel listener.*/
+/** Sets up the mouse wheel listener.
+  This may cause an exception on some OSs or versions of Processing.*/
 void setupMouseWheel() {
-  /*  addMouseWheelListener(new java.awt.event.MouseWheelListener() { 
+  addMouseWheelListener(new java.awt.event.MouseWheelListener() { 
    public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) { 
    state.scale += evt.getWheelRotation();
    }}); 
-   */
 }
 
 
-/** Key handler. */
+/** Keyboard handler.
+  Responds to numerous key commands, as follows. Camera or render settings changes are made directly to the state and will be noticed by the render loop on the next cycle.
+     arrow key: pan xy
+     SHIFT + arrow key: rotate xy
+     page up/down: pan depth
+     SHIFT + page up/down: rotate z
+     -/+: zoom out/in
+     0: reset pan, rotation and zoom
+     c: edit colors
+     l: edit random sequence length
+     r: generate a new random sequence
+     CTRL + o: open a state file
+     CTRL + s: save the current state to a file
+     CTRL + q: write the current state to the default state file
+     a: edit the dihedral angle
+     A: toggle animation of the dihedral angle
+     ENTER, e: edit the sequence
+     SPACE: flatten the sequence (temporarily set the dihedral to 0 degress)
+     k: edit the sequence repeat count
+     n: toggle display of sequence indices
+     CTRL + C: render the scene to a high-resolution image file
+     CTRL + D: render the scene to a DXF file
+     f: toggle display of effects
+     w: toggle wireframe rendering
+     b: toggle render of blur
+     F: edit effects parameters
+     */
 void keyPressed() {
   if (key == CODED && keyCode == SHIFT) {
     shiftDown = true;
@@ -426,7 +541,8 @@ void keyPressed() {
 */
 }
 
-/** Key handler. */
+/** Key handler.
+  Tracks holding and releasing of SPACE, SHIFT and CTRL. */
 void keyReleased() {
   if (key == ' ')
     flatten = false;
@@ -439,13 +555,13 @@ void keyReleased() {
   }
 }
 
-/** Adjusts the angle between elements*/
+/** Interpolates the displayed dihedral angle, based on the state and elapsed time since the last draw. */
 void doDisplayAngleInterpolate() {
   float itrp = ((float) elapsedLastDraw) / interpolationFactorAngle;
   displayAngleDegrees = (displayAngleDegrees*(1-itrp))+((flatten? 0:state.sequenceData.angleDegrees)*itrp);
 }
 
-/** Adjusts the angle between elements*/
+/** Animates the angle between elements, based on the elapsed time.*/
 void doAnimateAngle() {
   float itrp = ((float) elapsedLastDraw) / animationFactorAngle;
   displayAngleDegrees = (displayAngleDegrees*(1-itrp))+((displayAngleDegrees+1)*itrp);
@@ -457,36 +573,54 @@ void doAnimateAngle() {
 float rx = 0;
 float ry = 0;
 float rz = 0;
-/** rotates the scene given the mouse position*/
+/** Rotates the scene given the mouse position.
+  The mouse position is interpolated based on the state and elapsed time since the last draw.*/
 void doMouseRotate() {
+  //calculate the nominal rotation (adjusting from state units to screen units)
   float rxp = ((state.rotate.x)*0.005);
   float ryp = ((state.rotate.y)*0.005);
   float rzp = ((state.rotate.z)*0.005);
+
+  //the interpolation factor
   float itrp = ((float) elapsedLastDraw) / interpolationFactorMouse;
+  
+  //interpolate the new display rotation
   rx = (rx*(1-itrp))+(rxp*itrp);
   ry = (ry*(1-itrp))+(ryp*itrp);
   rz = (rz*(1-itrp))+(rzp*itrp);
   
+  //and rotate
   rotateZ(rz);
   rotateY(rx);
   rotateX(ry);
 }
 
+
 float panx = 0;
 float pany = 0;
 float panz = 0;
+/** Pans the scene given the mouse position.
+  The mouse position is interpolated based on the state and elapsed time since the last draw.*/
 void doMousePan() {
+  //calculate the nominal pan (adjusting from state units to screen units)
   float panxp = (state.pan.x)*0.02;
   float panyp = (state.pan.y)*0.02;
   float panzp = (state.pan.z)*0.02;
+
+  //the interpolation factor
   float itrp = ((float) elapsedLastDraw) / interpolationFactorMouse;
+  
+  //interpolate the new display pan
   panx = (panx*(1-itrp))+(panxp*itrp);
   pany = (pany*(1-itrp))+(panyp*itrp);
   panz = (panz*(1-itrp))+(panzp*itrp);
+
+  //pan the transform matrix 
   translate(panx, pany, panz);
 }
 
-/** scales the scene given the mouse wheel */
+/** Scales the scene given the mouse position.
+  The displayed scale is not interpolated.*/
 void doMouseScale() {
   float sceneScale = pow(2, state.scale.factor/12f);
   scale(sceneScale);

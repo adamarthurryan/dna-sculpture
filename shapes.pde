@@ -1,5 +1,8 @@
 PShape [] polyShapes;
 
+
+//static initialization creates links between the shape indices and letter codes
+//as well as giving the number of sides for each shape and the weighting of each one for random sequences
 static {
     Sequence.codeToIndex.put('t', 0);
     Sequence.codeToIndex.put('s', 1);

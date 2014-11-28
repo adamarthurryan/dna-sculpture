@@ -1,3 +1,4 @@
+/* Is this class still in use?*/
 
 //kuler: aarb test1
 //color [] cPalette = {#B28484, #CC5051, #FFFC60, #B2B151, #8FD5FF};
@@ -26,7 +27,6 @@ color [] cPalette = { #ffffff};
 float [] probPalette = {1};
 //float [] probPalette = {0, 0, 0, 1};
 color cAlpha = 0xff;
-
 
 int randomColorSeed;
 int randomColorNext;

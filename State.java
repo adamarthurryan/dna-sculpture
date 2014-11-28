@@ -4,34 +4,49 @@ import java.util.*;
 import javax.xml.bind.*;
 import javax.xml.bind.annotation.*;
  
-// this annoation marks the State class to be able to act as
-// an XML root element. The name parameter is only needed since
-// our XML element name is different from the class name:
-// <state> vs. State
+/** The program state captures details of camera position, render parameters and target sequence.
+  Identical states produce identically rendered images. 
+
+  The State class is able to act as an XML root element. 
+  This is enabled with the @XMLRootElement annotation.
+  The name parameter is only needed since
+  our XML element name is different from the class name:
+  <state> vs. State */
 @XmlRootElement(name="view") public class State {
     
-  // now we simply annotate the different variables
-  // depending if they are XML elements/nodes or node attributes
-  // the mapping to the actual data type is done automatically
-//  @XmlAttribute(name="timestamp") long timestamp;
-  
+  // Some general JAXB guidance:
+    // now we simply annotate the different variables
+    // depending if they are XML elements/nodes or node attributes
+    // the mapping to the actual data type is done automatically
+    //    @XmlAttribute(name="timestamp") long timestamp;
+      
+    // one of the best things in JAXB is the ability to map entire
+    // class hierarchies and collections of data
+    // in this case each <url> element will be added to this list
+    // the actual MyURL class is defined in its own tab in the Processing PDE
+    //    @XmlElement(name="url") List<MyURL> urls=new ArrayList<MyURL>();
     
   public State() {} 
   
+  /** Parameters for the fog effects.*/
   static class Fog {
     @XmlAttribute float offset = 0.0f; 
     @XmlAttribute float scale = 1.0f; 
   }
   
+  /** The x, y, and z position (translation or pan) of the camera.*/
   static class Point3 {
     @XmlAttribute float x = 0;
     @XmlAttribute float y = 0;
     @XmlAttribute float z = 0;
   }
   
+  /** The data of the current sequence. Presently only saves random sequences, not user input sequences*/
   static class SequenceData {
 //    @XmlElement(name="string") String string ="t";
 //    @XmlValue String string ="t";
+
+    //each of these sequence parameters maps to a xml attribute
     @XmlAttribute(name="repeat") int repeatCount = 1;
     @XmlAttribute(name="angle") float angleDegrees = 30;
     @XmlAttribute(name="seed") int seed = 0;
@@ -39,10 +54,12 @@ import javax.xml.bind.annotation.*;
     int [] sequence = new int[] {0};
   }
   
+  /** The camera zoom / scene scale.*/
   static class Scale {
     @XmlAttribute float factor = 1f;
   }
   
+  /** The various render colors: background, light and shadow.*/
   static class Color {
     int background;
     int light;
@@ -52,22 +69,13 @@ import javax.xml.bind.annotation.*;
     @XmlAttribute(name="light") String strLight ="101010";
   }
   
+  // each of the state inner classes map to an xml element 
   @XmlElement(name="sequence") SequenceData sequenceData = new SequenceData();
   @XmlElement(name="rotation") Point3 rotate = new Point3();
   @XmlElement(name="center") Point3 pan = new Point3();
   @XmlElement Scale scale = new Scale();
   @XmlElement Fog fog = new Fog();
   @XmlElement(name="color") Color colorData = new Color();
-  
-  /** note that the sequence itself is not an xml element - it gets translated to and from a string for io*/
-  
-    
-  // one of the best things in JAXB is the ability to map entire
-  // class hierarchies and collections of data
-  // in this case each <url> element will be added to this list
-  // the actual MyURL class is defined in its own tab in the Processing PDE
-  //@XmlElement(name="url")
-  //  List<MyURL> urls=new ArrayList<MyURL>();
     
     
   
@@ -129,7 +137,3 @@ import javax.xml.bind.annotation.*;
 
   }
 }
-
-/*
-
-*/

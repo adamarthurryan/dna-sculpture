@@ -4,10 +4,11 @@ import java.util.*;
 import javax.xml.bind.*;
 import javax.xml.bind.annotation.*;
  
-// this annoation marks the State class to be able to act as
-// an XML root element. The name parameter is only needed since
-// our XML element name is different from the class name:
-// <state> vs. State
+/** The State class is able to act as
+ an XML root element. This is enabled with the @XMLRootElement annotation.
+The name parameter is only needed since
+ our XML element name is different from the class name:
+ <config> vs. Configuration */
 @XmlRootElement(name="config")
   public class Configuration {
     
@@ -53,10 +54,18 @@ import javax.xml.bind.annotation.*;
   
   /** Outputs the Configuration object to the given xml file path.*/
   public void toXMLFile (PApplet papplet, String path) {
+    
     try {
+      //create an instance of teh JAXBContext for the Configuration class
       JAXBContext jc = JAXBContext.newInstance(Configuration.class );
+
+      //create a marshaller for this context
       Marshaller m = jc.createMarshaller();
+
+      //create the xml  for this marshaller
+      //the xml is written to an output stream initialized to the given path
       m.marshal(this, papplet.createOutput(path) );
+      
     } catch( JAXBException e ){
       System.out.println("error writing xml: ");
       e.printStackTrace();
