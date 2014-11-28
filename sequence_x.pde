@@ -35,28 +35,27 @@ void moveToEdge(PShape shape, int edge) {
      Each shape will be further rotated by the given angle along its shared edge.*/
 void plotSequence(PShape [] shapes, int [] sequence, float angle) {
   pushMatrix();
-  //restart the random color sequence
-  goFirstColor();
  
+  //repeat once for each "repeat count"
   for (int k=0;k<state.sequenceData.repeatCount;k++) {
+    //for each shape in the sequence
     for (int i=0; i<sequence.length; i+=2) {
-      //fill(192,192,255);//random(192, 255),random(192,255),random(192,255));
       
       
+      //start drawing the shape
       beginShape();
+      strokeWeight(0);      
       
-      strokeWeight(0);
-      color cFill = nextColor();
-      fill(cFill, cAlpha);
-      
-      
+      //add the vectors from the shape
       for (int j=0;j<shapes[sequence[i]].getVertexCount();j++) {
         PVector v = shapes[sequence[i]].getVertex(j);
         vertex(v.x, v.y, v.z);
       }
     
+      //done
       endShape();
 
+      //if plot numbers is enabled, or edit mode, draw the sequence index number on the shape
       if (plotNumbers || (editMode && i/2 == editIndex)) {
         pushMatrix();
         scale(0.01);
@@ -70,10 +69,13 @@ void plotSequence(PShape [] shapes, int [] sequence, float angle) {
         popMatrix();
       }
     
-    
+      //in edit mode, we can optionally hide the part of the sequence not being edited
       if (editMode && hideAfterEditIndex && i/2 == editIndex)
         break;
     
+      //rotate the transformation matrix so that the next shape in sequence:
+        //is connected to the correct edge of this shape
+        //is rotated by the appropraite dihedral
       if (i+1<sequence.length) {
         moveToEdge(shapes[sequence[i]], sequence[i+1]);
         rotateX(angle);

@@ -43,9 +43,6 @@ import javax.xml.bind.annotation.*;
   
   /** The data of the current sequence. Presently only saves random sequences, not user input sequences*/
   static class SequenceData {
-//    @XmlElement(name="string") String string ="t";
-//    @XmlValue String string ="t";
-
     //each of these sequence parameters maps to a xml attribute
     @XmlAttribute(name="repeat") int repeatCount = 1;
     @XmlAttribute(name="angle") float angleDegrees = 30;
@@ -109,12 +106,6 @@ import javax.xml.bind.annotation.*;
   /** Outputs the State object to the given xml file path.*/
   public void toXMLFile (PApplet papplet, String path) {
     
-    //this is probably not the best JAXB way to do this, but whatever...
-    //this.sequenceData.string = Sequence.toString(this.sequenceData.sequence);
-
-    //Date d = new Date();
-    //this.timestamp = d.getTime()/1000;
-
     this.colorData.strBackground = Integer.toHexString(this.colorData.background);
     this.colorData.strLight = Integer.toHexString(this.colorData.light);
     this.colorData.strShadow = Integer.toHexString(this.colorData.shadow);

@@ -18,23 +18,7 @@ static {
     Sequence.probShapes = new float[] {1,0.7,0.4,0.3};
 }
 
-/*
-public class Shape extends ArrayList {
-  public Shape () {
-  }
-  public void vertex(float x, float y) {
-    PVector vector = new PVector(x,y);
-    this.add(vector);
-  }
-  public PVector getVertex(int i) {
-    return (PVector) get(i);
-  }
-  public int getVertexCount () {
-    return size();
-  }
-}
-*/
-
+/** Plot the given PShape. Just calls Processing's shape() function.*/
 void plotShape (PShape shape) {
   shape(shape);
 }

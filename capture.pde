@@ -5,7 +5,7 @@ float FOV = 39.5;
 /** The camera depth.*/  
 float cameraZ;
 
-/** The number of window-sized tiles that will be stitched together to make the captured image
+/** The number of window-sized tiles that will be stitched together to make the captured image. */
 int NUM_TILES = 3;
 
 

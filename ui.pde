@@ -87,7 +87,7 @@ void setupUI() {
   fog = loadShader("FogFrag.glsl", "FogVert.glsl");
   depth = loadShader("DepthFrag.glsl", "DepthVert.glsl");
   wireframe = loadShader("Wireframe.glsl");
-}
++}
 
 /** Render the current scene.
   This method is called by draw once each render cycle.
