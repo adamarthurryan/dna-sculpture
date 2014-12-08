@@ -7,6 +7,28 @@ import java.util.*;
   Sequences are represented as int arrays - this is kind of janky.*/
 public class Sequence {
 
+  /** The integer array that represents the sequence. */
+  protected int [] sequenceInfo;
+
+  public static final Sequence EMPTY_SEQUENCE = new Sequence ( new int[] {0} );
+
+  /** Allow direct access to the sequenceInfo for rendering purposes.
+    This is easy and fast, but not a great separation of concerns. 
+    It would be better to implement Iterable for sequences, to hide this representation.*/
+  public int [] getSequenceInfo () {
+    return sequenceInfo;
+   }
+  
+  /** Returns the length of the sequence. */
+  public int length() {
+    return sequenceInfo.length / 2;
+  }
+ 
+  /** The constructor is protected - use a method like parse() or calcRandomSequence() or the EMPTY_SEQUENCE constant get a sequence instance. */
+  protected Sequence (int [] sequenceInfo) {
+    this.sequenceInfo = sequenceInfo;
+  }
+  
   /** Maps indexes of shapes to letter codes.*/
   public static HashMap codeToIndex = new HashMap();
   /** Maps letter codes to indexes of shapes.*/
@@ -17,62 +39,64 @@ public class Sequence {
   public static float [] probShapes;
  
   /** Renders the sequence as a string of letters (shapes) and numbers (connecting edges).*/
-  public static String toString(int [] sequence) {
+  public String toString() {
     //a buffer for the string
     StringBuffer buffer=new StringBuffer();
     //for each shape in the sequence
-    for (int i=0;i<sequence.length;i+=2) {
+    for (int i=0;i<sequenceInfo.length;i+=2) {
       //add its letter code 
-      buffer.append(Sequence.indexToCode.get(sequence[i]));
+      buffer.append(Sequence.indexToCode.get(sequenceInfo[i]));
       //and if its not the last, add the edge connection to the next shape
-      if (i+1<sequence.length) {
-        buffer.append(sequence[i+1]);
+      if (i+1<sequenceInfo.length) {
+        buffer.append(sequenceInfo[i+1]);
       }
     }
     return buffer.toString();
   }
 
+
   /** Parses the given string of letters (shapes) and numbers (connecting edges) into a sequence.*/
-  public static int [] parse(String string) {
+  public static Sequence parse(String string) {
     //ignore dashes, spaces and commas
     string = string.replaceAll("-", "");
     string = string.replaceAll(" ", "");
     string = string.replaceAll(",", "");
     
     //create a new sequence  
-    int [] sequence = new int[string.length()];
+    int [] sequenceInfo = new int[string.length()];
     
     // for each even-indexed letter in the string
     for (int i=0;i<string.length();i+=2) {
       //look up the shape that is represented by that letter and add it to the sequence
       char code = string.charAt(i);
-      sequence[i] = ((Integer) (Sequence.codeToIndex.get(code))).intValue();
+      sequenceInfo[i] = ((Integer) (Sequence.codeToIndex.get(code))).intValue();
       
       //and add the connecting edge to the sequence
       if (i+1 < string.length()) {
-        sequence[i+1] = Integer.parseInt(string.substring(i+1,i+2));
+        sequenceInfo[i+1] = Integer.parseInt(string.substring(i+1,i+2));
       }
     }
-    return sequence;
+    
+    return new Sequence(sequenceInfo);
   }
   
   /** Returns a random sequence with the given seed and number of shapes.*/
-  public static int [] calcRandomSequence(int seed, int n) {
+  public static Sequence calcRandomSequence(int seed, int n) {
     Random random=new Random(seed);
     
     //make a new sequence
-    int [] sequence = new int[n*2-1];
+    int [] sequenceInfo = new int[n*2-1];
     //for each shape in the sequence
-    for (int i=0; i<sequence.length; i+=2) {
+    for (int i=0; i<sequenceInfo.length; i+=2) {
       //choose a shape
-      sequence[i] = chooseRandomShape(random);
+      sequenceInfo[i] = chooseRandomShape(random);
       //and choose a connecting edge
-      if (i+1<sequence.length)
-        sequence[i+1] = random.nextInt(Sequence.numSides[sequence[i]]-1)+1;
+      if (i+1<sequenceInfo.length)
+        sequenceInfo[i+1] = random.nextInt(Sequence.numSides[sequenceInfo[i]]-1)+1;
         
     }
     
-    return sequence;
+    return new Sequence(sequenceInfo);
   }
 
 

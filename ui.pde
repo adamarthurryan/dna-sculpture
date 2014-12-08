@@ -232,7 +232,7 @@ void editAngle() {
 /** Prompt to edit the current sequence. */
 void editSequence() {
   //prompt
-  String sSequence = Sequence.toString(state.sequenceData.sequence);
+  String sSequence = state.sequenceData.sequence.toString();
   sSequence = javax.swing.JOptionPane.showInputDialog("Sequence:", sSequence);
   
   //update the state
@@ -464,10 +464,6 @@ void keyPressed() {
   //flatten the object while SPACE is held
   else if (key == ' ') {
     flatten = true;
-  }
-  //toggle number display
-  else if (key == 'n') {
-    plotNumbers = !plotNumbers;
   }
 
   //record DXF

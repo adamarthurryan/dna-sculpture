@@ -33,13 +33,16 @@ void moveToEdge(PShape shape, int edge) {
       each odd element 2n+1 specifies a connecting side between element 2n and 2n+2.
      If the sequence has even length, the last element has no effect. 
      Each shape will be further rotated by the given angle along its shared edge.*/
-void plotSequence(PShape [] shapes, int [] sequence, float angle) {
+void plotSequence(PShape [] shapes, Sequence sequence, float angle) {
   pushMatrix();
+ 
+  int [] sequenceInfo = sequence.sequenceInfo;
  
   //repeat once for each "repeat count"
   for (int k=0;k<state.sequenceData.repeatCount;k++) {
+    
     //for each shape in the sequence
-    for (int i=0; i<sequence.length; i+=2) {
+    for (int i=0; i<sequenceInfo.length; i+=2) {
       
       
       //start drawing the shape
@@ -47,8 +50,8 @@ void plotSequence(PShape [] shapes, int [] sequence, float angle) {
       strokeWeight(0);      
       
       //add the vectors from the shape
-      for (int j=0;j<shapes[sequence[i]].getVertexCount();j++) {
-        PVector v = shapes[sequence[i]].getVertex(j);
+      for (int j=0;j<shapes[sequenceInfo[i]].getVertexCount();j++) {
+        PVector v = shapes[sequenceInfo[i]].getVertex(j);
         vertex(v.x, v.y, v.z);
       }
     
@@ -58,8 +61,8 @@ void plotSequence(PShape [] shapes, int [] sequence, float angle) {
       //rotate the transformation matrix so that the next shape in sequence:
         //is connected to the correct edge of this shape
         //is rotated by the appropraite dihedral
-      if (i+1<sequence.length) {
-        moveToEdge(shapes[sequence[i]], sequence[i+1]);
+      if (i+1<sequenceInfo.length) {
+        moveToEdge(shapes[sequenceInfo[i]], sequenceInfo[i+1]);
         rotateX(angle);
       }
     }
@@ -68,8 +71,8 @@ void plotSequence(PShape [] shapes, int [] sequence, float angle) {
 }
 
 /** Prints the sequence to the console. */
-void printSequence(int [] sequence) {
-  println(Sequence.toString(sequence));
+void printSequence(Sequence sequence) {
+  println(sequence.toString());
 }
 
 

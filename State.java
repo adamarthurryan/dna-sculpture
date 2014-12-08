@@ -48,7 +48,10 @@ import javax.xml.bind.annotation.*;
     @XmlAttribute(name="angle") float angleDegrees = 30;
     @XmlAttribute(name="seed") int seed = 0;
     @XmlAttribute(name="length") int lengthRandom = 1;
-    int [] sequence = new int[] {0};
+ 
+ 
+ //   int [] sequence = new int[] {0};
+    Sequence sequence = Sequence.EMPTY_SEQUENCE;
   }
   
   /** The camera zoom / scene scale.*/
