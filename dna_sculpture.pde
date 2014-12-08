@@ -30,9 +30,6 @@ void setup() {
   //initialize the shape objects: triangle, square, pentagon, etc.
   setupShapes();
 
-  //initialize the random color generating facility
-  //this is no longer used, I think
-  setupColors();
 
   //setup the camera for capturing / rendering to image files
   setupCapture();

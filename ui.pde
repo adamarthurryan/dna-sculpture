@@ -15,7 +15,7 @@ boolean renderFX = true;
 /** Set to true to render a soft-focus blur.*/
 boolean renderBlur = false;
 
-/** Set to true to animate the dihedral angle - folding the sequence open and closed.
+/** Set to true to animate the dihedral angle - folding the sequence open and closed. */
 boolean animateAngle = false;
 
 /** Set to true to render the squence as a wireframe.*/
@@ -56,6 +56,8 @@ int millisLastDraw = 0;
 /** The time elapsed since the last draw cycle.*/
 int elapsedLastDraw = 0;
 
+/** If true, flatten the sequence and render with a dihedral angle of 0.*/
+boolean flatten = false;
 
 //render shaders
 PShader fog;
@@ -72,7 +74,7 @@ void setupUI() {
   fog = loadShader("FogFrag.glsl", "FogVert.glsl");
   depth = loadShader("DepthFrag.glsl", "DepthVert.glsl");
   wireframe = loadShader("Wireframe.glsl");
-+}
+}
 
 /** Render the current scene.
   This method is called by draw once each render cycle.
@@ -332,7 +334,7 @@ void mouseDragged() {
 void setupMouseWheel() {
   addMouseWheelListener(new java.awt.event.MouseWheelListener() { 
    public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) { 
-   state.scale += evt.getWheelRotation();
+   state.scale.factor += evt.getWheelRotation();
    }}); 
 }
 

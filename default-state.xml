@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <view>
-    <sequence length="3" seed="1188347904" angle="30.0" repeat="1"/>
-    <rotation z="240.0" y="1983.0" x="-1817.0"/>
-    <center z="-840.0" y="541.0" x="60.0"/>
-    <scale factor="44.0"/>
-    <fog scale="0.5" offset="0.4"/>
-    <color light="f8f8f8" shadow="80808" background="ffffff"/>
+    <sequence repeat="1" angle="30.0" seed="899701120" length="999"/>
+    <rotation x="-1625.0" y="2235.0" z="240.0"/>
+    <center x="132.0" y="-331.0" z="-840.0"/>
+    <scale factor="11.0"/>
+    <fog offset="0.4" scale="0.5"/>
+    <color background="ffffff" shadow="80808" light="f8f8f8"/>
 </view>
