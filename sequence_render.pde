@@ -70,14 +70,4 @@ void plotSequence(PShape [] shapes, Sequence sequence, float angle) {
   popMatrix();
 }
 
-/** Prints the sequence to the console. */
-void printSequence(Sequence sequence) {
-  println(sequence.toString());
-}
-
-
-
-
-
-
 
